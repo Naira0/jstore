@@ -61,7 +61,7 @@ jstore.incr() // average 135ms
 Obviously speed entirely depends on the number of lines the file has but it is still fairly fast on even a massive file. ofc a file with 50k lines is unrealistic for its use case.
 
 ## Guides
-The api is fairly easy to learn and use it mimics the api of most key value databases and is fairly well documented whithin the code.
+The api is fairly easy to learn and use it mimics the api of most key value databases and is fairly well documented within the code.
 
 ### Basics
 
