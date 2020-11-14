@@ -6,6 +6,7 @@ module.exports = class Parser {
         this.index = {headers: {}};
         // header block stores the current header in the file so all the values can be read to that header.
         this.headerBlock;
+        this.singleHeader = {};
         this.filename = filename.endsWith('.jstore') ? filename : filename + '.jstore';
         this.path = path();
     }
@@ -105,6 +106,58 @@ module.exports = class Parser {
             jstoreFormat += `${header}\n${kv}`;
         }
         return jstoreFormat;
+    }
+
+    /**
+     * finds and parses a single header to an object instead of the entire file.
+     * @param {string} target the target header to parse.
+     */
+    parseHeader(target) {
+        const file = readFileSync(this.path + '\\' + this.filename, 'utf-8').replace(/^\s\n/gm, "");
+        let lines = file.split('\n');
+
+        
+        let header;
+
+        for(let i = 0, line; i !== lines.length; i++) {
+            line = lines[i];
+
+            if(line.startsWith('[') && line.endsWith(']') && line.includes(target) && header !== target) {
+                header = line.slice(1, -1);
+                this.singleHeader[header] = {};
+                continue;
+            }
+
+            if(typeof header === 'undefined')
+                continue;
+
+            if(line.startsWith('[') && line.endsWith(']'))
+                break;
+
+            const arrayFormat = line.slice(line.indexOf('[') + 1, -1).split(',');
+            const key = line !== '' ? line.slice(0, line.indexOf('=')).trim() : null;
+            let value = !this.isArray(line) ? line.slice(line.indexOf('=') + 1).trim() : arrayFormat;
+
+            switch(value) {
+                case 'true':
+                    value = true
+                break;
+                case 'false':
+                    value = false;
+                break;
+            }
+
+            if(!isNaN(value) && typeof value !== 'boolean') {
+                if(value % 1 === 0)
+                    value = parseInt(value);
+                if(value % 1 !== 0)
+                    value = parseFloat(value);
+            }
+            
+            if(key !== null)
+                this.singleHeader[header][key] = value;
+        }
+        return this.singleHeader;
     }
 
     // checks if a string is an array inside a jstore file.

@@ -2,8 +2,6 @@ module.exports = class Header {
     constructor(parser, header) {
         this.parser = parser;
         this.name = header;
-
-        //return this.parser.index.headers[header];
     }
 
     set(key, value) {
@@ -11,7 +9,7 @@ module.exports = class Header {
     }
 
     get(key) {
-        return this.parser.index.headers[this.name][key];
+        return this.parser.singleHeader[this.name][key];
     }
 
     delete(key = null) {
@@ -47,6 +45,6 @@ module.exports = class Header {
     }
 
     get entries() { 
-        return this.parser.index.headers[this.name];
+        return this.parser.singleHeader[this.name];
     }
 }

@@ -53,12 +53,12 @@ module.exports = class Jstore extends Parser {
      */
 
     get(header, key = null) {
-        this.parse();
+        this.parseHeader(header);
 
         if(key === null)
             return new Header(this, header);
 
-        return this.index.headers[header][key];
+        return this.singleHeader[header][key];
     }
 
     /**
@@ -176,9 +176,9 @@ module.exports = class Jstore extends Parser {
      * @param {string} header 
      */
     headerExists(header) {
-        this.parse();
+        this.parseHeader(header);
 
-        if(this.index.headers[header])
+        if(this.singleHeader[header])
             return true;
         else 
             return false;
@@ -190,9 +190,9 @@ module.exports = class Jstore extends Parser {
      * @param {string} key 
      */
     keyExists(header, key) {
-        this.parse();
+        this.parseHeader(header);
 
-        if(this.index.headers[header][key])
+        if(this.singleHeader[header][key])
             return true;
         else
             return false;
@@ -203,12 +203,12 @@ module.exports = class Jstore extends Parser {
      * @param {string} header 
      */
     keys(header) {
-        this.parse();
+        this.parseHeader(header);
 
-        if(!this.index.headers[header]) 
+        if(!this.singleHeader[header]) 
             return null;
         
-        return Object.keys(this.index.headers[header]);
+        return Object.keys(this.singleHeader[header]);
     }
 
     /**
@@ -216,12 +216,12 @@ module.exports = class Jstore extends Parser {
      * @param {string} header 
      */
     values(header) {
-        this.parse();
+        this.parseHeader(header);
 
-        if(!this.index.headers[header]) 
+        if(!this.singleHeader[header]) 
             return null;
         
-        return Object.values(this.index.headers[header]);
+        return Object.values(this.singleHeader[header]);
     }
     
     /**
