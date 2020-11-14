@@ -6,9 +6,9 @@ A blazing fast formatted text storage library.
 
 sadly jstore was taken so i had to add my username to it.
 
-### Disclaimer: this is not a database and should not be used as one however you can use it as one if you wish. 
-
 ## Usage & format
+
+### Disclaimer: this is not a database and should not be used as one however you can use it as one if you wish. 
 
 #### Usage:
 ```javascript
