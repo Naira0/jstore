@@ -57,3 +57,4 @@ jstore.headers // average 100ms
 
 jstore.incr() // average 135
 ```
+Obviously speed entirely depends on the number of lines the file has but it is still fairly fast on even a massive file. ofc a file with 50k lines is unrealistic for its use case.
