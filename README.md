@@ -89,7 +89,7 @@ jstore.set('header', {
 ### Type specific operations
 there are certain methods that only work on certain types
 ```javascript
-if the key is an array it will add the value to the end of it otherwise it will do nothing.
+//if the key is an array it will add the value to the end of it otherwise it will do nothing.
 jstore.push('header', 'key', 'value);
 
 // if the key is a number it will increament it by 50 you can also use `jstore.decr()` as an opposite.
@@ -119,3 +119,12 @@ the jstore file format is very simple and easy to read and edit.
 jstore will always sync the contents of the file when setting new data so you can edit it manually.
 
 when you create a new jstore class it will check if the given file name exists and if it doesnt it will create one in the current working directory.
+
+### How it works
+the way it works is fairly simple.
+
+fist it uses the parser class to parse the contents of the jstore file to a javascript object.
+
+then whenever any data is set it will set that data to that object and it will parse it back to the jstore file format.
+
+for any operations that only get data it will only parse the target header which makes all get operations much much faster although setting data is still very fast and optomized.
