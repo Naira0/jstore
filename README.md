@@ -86,6 +86,16 @@ jstore.set('header', {
   });
 ```
 
+### Type specific operations
+there are certain methods that only work on certain types
+```javascript
+if the key is an array it will add the value to the end of it otherwise it will do nothing.
+jstore.push('header', 'key', 'value);
+
+// if the key is a number it will increament it by 50 you can also use `jstore.decr()` as an opposite.
+jstore.incr('header', 'key', 50);
+```
+
 #### Iterating over headers.
 To iterate over a header you can use `jstore.headers` and it will return an array of header classes.
 ```javascript
