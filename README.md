@@ -123,8 +123,8 @@ when you create a new jstore class it will check if the given file name exists a
 ### How it works
 the way it works is fairly simple.
 
-fist it uses the parser class to parse the contents of the jstore file to a javascript object.
+first it uses the parser class to parse `parser.parse()` the contents of the jstore file to a javascript object.
 
-then whenever any data is set it will set that data to that object and it will parse it back to the jstore file format.
+then whenever any data is set it will set that data to that object and it will parse it back to the jstore file format `parser.parseObject()`.
 
-for any operations that only get data it will only parse the target header which makes all get operations much much faster although setting data is still very fast and optomized.
+for any operations that only get data it will only parse the target header `parser.parseHeader()` which makes all get operations much faster although setting data is still very fast and optomized.
