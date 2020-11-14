@@ -36,6 +36,7 @@ Speed is very important in a project like this even tho it should not be used as
 you can run all the benchmarks yourself in the test folder / tests.js
 
 ### all tests done on node version 14.
+File size: 500 lines
 ```javascript
 jstore.set() // average 3ms
 
@@ -46,7 +47,7 @@ jstore.headers // average 2ms
 jstore.incr() // average 3ms
 ```
 
-the following tests were done on a jstore file with 50k lines.
+File size: 50k lines
 ```javascript
 jstore.set() // average 130ms
 
