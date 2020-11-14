@@ -114,6 +114,24 @@ module.exports = class Jstore extends Parser {
     }
 
     /**
+     * Pops a value from the end of an array
+     * @param {string} header 
+     * @param {string} key 
+     */
+    pop(header, key) {
+        this.parse();
+
+        let index = this.index.headers[header][key];
+
+        if(!Array.isArray(index))
+            return null;
+
+        index.pop();
+        this.write();
+        return index;
+    }
+
+    /**
      * Increases the value of a key by a given numerical value.
      * @param {string} header 
      * @param {*} key 
