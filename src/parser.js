@@ -20,9 +20,9 @@ module.exports = class Parser {
         const file = readFileSync(this.path + '\\' + this.filename, 'utf-8').replace(/^\s\n/gm, "");
         let lines = file.split('\n');
 
-        for(let line of lines) {
-            line = line.replace(/\r/g, "");
-
+        for(let i = 0, line; i !== lines.length; i++) {
+            line = lines[i];
+            
             if(line.startsWith('[') && line.endsWith(']')) {
                 const header = line.slice(1, -1);
 
@@ -71,9 +71,13 @@ module.exports = class Parser {
 
         const formatValues = obj => {
             let values = '';
-            let counter = 0;
 
-            for(let [key, value] of Object.entries(obj)) {
+            // using this method instead of Object.entries(obj) due to the slight performance increase 
+            const key = Object.keys(obj)
+            for(let i = 0, value; i <= key.length; i++) {
+                value = obj[key[i]];
+
+                if(typeof value === 'undefined') continue;
 
                 switch(value) {
                     case true:
@@ -84,8 +88,7 @@ module.exports = class Parser {
                     break;
                 }
 
-                values += `${key} = ${Array.isArray(value) ? '[' + value + ']' : value}\n`
-                counter++;
+                values += `${key[i]} = ${Array.isArray(value) ? '[' + value + ']' : value}\n`
             }
             return values;
         }
