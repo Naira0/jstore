@@ -82,3 +82,20 @@ To iterate over a header you can use `jstore.headers` and it will return an arra
 // clears all headers in the given jstore file.
 jstore.headers.forEach(header => header.clear());
 ```
+
+### Types
+jstore has support for most javascript types as it uses javascript objects as a form of serialization
+
+this includes:
+* strings
+* booleans
+* arrays
+* numbers
+
+even keys can be one of these types except for arrays.
+
+### Jstore file
+the jstore file format is very simple and easy to read and edit.
+jstore will always sync the contents of the file when setting new data so you can edit it manually.
+
+when you create a new jstore class it will check if the given file name exists and if it doesnt it will create one in the current working directory.
