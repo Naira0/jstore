@@ -29,7 +29,7 @@ module.exports = class Jstore extends Parser {
     set(header, key, value = null) {
         this.parse();
 
-        if(!this.headerExists(header))
+        if(!this.index.headers[header])
             this.index.headers[header] = {}
 
         if(typeof key === 'object' && value === null && !Array.isArray(value)) {
@@ -227,13 +227,14 @@ module.exports = class Jstore extends Parser {
     /**
      * Returns an array of all headers in the file as classes.
      */
-    headers() {
+    get headers() {
         this.parse();
         
         let headerArray = [];
 
-        for(const [key, value] of Object.entries(this.index.headers)) 
-            headerArray.push(new Header(this, key));
+        const key = Object.keys(this.index.headers);
+        for(let i = 0; i !== key.length; i++) 
+            headerArray.push(new Header(this, key[i]));
         
         return headerArray;
     }
