@@ -85,7 +85,7 @@ module.exports = class Jstore extends Parser {
     clear(header) {
         this.parse();
 
-        if(this.headerExists(header)) {
+        if(this.index.headers[header]) {
            this.index.headers[header] = {};
            this.write();
            return new Header(this, header)
@@ -163,7 +163,7 @@ module.exports = class Jstore extends Parser {
     createHeader(header) {
         this.parse();
 
-        if(!this.headerExists(header))
+        if(!this.index.headers[header])
             this.index.headers[header] = {};
 
         this.write();
@@ -205,7 +205,7 @@ module.exports = class Jstore extends Parser {
     keys(header) {
         this.parse();
 
-        if(!this.headerExists(header)) 
+        if(!this.index.headers[header]) 
             return null;
         
         return Object.keys(this.index.headers[header]);
@@ -218,7 +218,7 @@ module.exports = class Jstore extends Parser {
     values(header) {
         this.parse();
 
-        if(!this.headerExists(header)) 
+        if(!this.index.headers[header]) 
             return null;
         
         return Object.values(this.index.headers[header]);
