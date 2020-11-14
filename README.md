@@ -17,6 +17,7 @@ const jstore = new Jstore('data');
 
 jstore.set('settings', 'fullscreen', true);
 const fullscreen = jstore.get('settings', 'fullscreen');
+
 console.log(fullscreen); // Output: True
 ```
 
