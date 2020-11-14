@@ -64,7 +64,7 @@ The api is fairly easy to learn and use it mimics the api of most key value data
 
 ### Basics
 
-#### Headers & setting data
+#### Headers
 Headers are much like tables in databases it helps structure your code.
 
 whenever you do any sort of operation that works on a header it will return a header class which has the same methods except you dont have to write a header in the paramater.
