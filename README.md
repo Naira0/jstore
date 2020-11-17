@@ -23,13 +23,8 @@ const fullscreen = jstore.get('settings', 'fullscreen');
 console.log(fullscreen); // Output: True
 ```
 
-#### jstore file format
+#### jstore file output
 ```
-[header]
-key = value
-array = [...]
-
-[cooler header]
-key 2 = value 2
-bool = true
+[settings]
+fullscreen = true
 ```
