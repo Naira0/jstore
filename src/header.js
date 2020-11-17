@@ -28,6 +28,10 @@ module.exports = class Header {
         this.parser.push(this.name, key, value);
     }
 
+    pop(key) {
+        this.parser.pop(this.name, key);
+    }
+    
     incr(key, value = 1) {
         this.parser.incr(this.name, key, value);
     }
