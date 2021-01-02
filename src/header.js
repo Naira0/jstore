@@ -48,7 +48,8 @@ module.exports = class Header {
         return this.parser.values(this.name);
     }
 
+    // BUG: if a new value is set to the header it wont show it until the next time its called.
     get entries() { 
-        return this.parser.singleHeader[this.name];
+        return this.parser.parseHeader(this.name);
     }
 }

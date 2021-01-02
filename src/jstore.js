@@ -182,10 +182,10 @@ module.exports = class Jstore extends Parser {
     createHeader(header) {
         this.parse();
 
-        if(!this.index.headers[header])
+        if(!this.index.headers[header]) {
             this.index.headers[header] = {};
-
-        this.write();
+            this.write();
+        }
 
         return new Header(this, header);
     }
