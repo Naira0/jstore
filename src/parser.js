@@ -1,4 +1,5 @@
 const { readFileSync } = require('fs');
+const { join } = require('path');
 
 module.exports = class Parser {
     constructor(filename, path = process.cwd) {
@@ -16,15 +17,14 @@ module.exports = class Parser {
      * @return {object} 
      */
     parse() {
-
+        
         // reads file and removes empty lines then it splits it into an array by the new lines.
-        const file = readFileSync(this.path + '\\' + this.filename, 'utf-8').replace(/^\s\n/gm, "");
+        const file = readFileSync(join(this.path, this.filename), 'utf-8').replace(/^\s\n/gm, "");
         let lines = file.split('\n');
 
-        for(let i = 0, line; i !== lines.length; i++) {
-            line = lines[i];
+        for(let i = 0, line = lines[i]; i !== lines.length; i++) {
             
-            if(line.startsWith('[') && line.endsWith(']')) {
+            if(line[0] == '[' && line[-1] == ']') {
                 const header = line.slice(1, -1);
 
                 this.index.headers[header] = {};
@@ -122,7 +122,7 @@ module.exports = class Parser {
         for(let i = 0, line; i !== lines.length; i++) {
             line = lines[i];
 
-            if(line.startsWith('[') && line.endsWith(']') && line.includes(target) && header !== target) {
+            if(line[0] == '[' && line[-1] == ']' && line.includes(target) && header !== target) {
                 header = line.slice(1, -1);
                 this.singleHeader[header] = {};
                 continue;
@@ -131,7 +131,7 @@ module.exports = class Parser {
             if(typeof header === 'undefined')
                 continue;
 
-            if(line.startsWith('[') && line.endsWith(']'))
+            if(line[0] == '[' && line[-1] == ']')
                 break;
 
             const arrayFormat = line.slice(line.indexOf('[') + 1, -1).split(',');

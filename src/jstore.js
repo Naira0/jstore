@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { join } = require('path');
 const Parser = require('./parser');
 const Header = require('./header');
 
@@ -12,7 +13,7 @@ module.exports = class Jstore extends Parser {
         super(filename);
 
         this.path = path();
-        this.dirname = this.path + '\\' + this.filename;
+        this.dirname = join(this.path, this.filename);
 
         if(!fs.existsSync(this.dirname))
             fs.writeFileSync(this.dirname, '');
