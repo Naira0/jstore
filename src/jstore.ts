@@ -3,7 +3,7 @@ import { join } from 'path';
 import Parser from './parser';
 import Header from './header';
 
-export default class Jstore extends Parser {
+export class Jstore extends Parser {
     private filepath: string;
 
     constructor(name: string, path = process.cwd()) {
@@ -46,7 +46,7 @@ export default class Jstore extends Parser {
      * @param {*} key 
      */
 
-    public get(header: string, key: any = null): (Header | any) {
+    public get(header: string, key: any = null): (Header | null) {
         const parsedHeader = this.parseHeader(header);
 
         if(key === null)
@@ -207,11 +207,11 @@ export default class Jstore extends Parser {
     public createHeader(header: string) {
         this.parse();
 
-        if(this.index.headers[header])
-            return;
-
-        this.index.headers[header] = {};
-        this.write();
+        // will only create the header if it exists
+        if(!this.index.headers[header]) {
+            this.index.headers[header] = {};
+            this.write();
+        }
 
         return new Header(this, header);
     }
@@ -286,9 +286,10 @@ export default class Jstore extends Parser {
 
     /**
      * returns all headers that match the given paramater (includes it in the header name not exact match)
-     * @param header 
+     * @param {string | RegExp} header
+     * @returns {Array<Header>} 
      */
-    public findHeaders(header: string) {
+    public findHeaders(header: string | RegExp) {
         const file = this.rawFile();
 
         let headers = [];
@@ -299,8 +300,14 @@ export default class Jstore extends Parser {
             if(this.isHeader(line)) {
                 const formatedHeader = line.slice(1, -1);
 
-                if(formatedHeader.includes(header))
-                    headers.push(new Header(this, formatedHeader));
+                if(header instanceof RegExp) {
+                    if(formatedHeader.match(header))
+                        headers.push(new Header(this, formatedHeader));
+                }
+                else {
+                    if(formatedHeader.includes(header))
+                        headers.push(new Header(this, formatedHeader));
+                }
             }
         }
 

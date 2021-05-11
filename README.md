@@ -14,7 +14,7 @@ For more info check out the [wiki](https://github.com/Naira0terminator/jstore/wi
 
 #### Usage:
 ```javascript
-const Jstore = require('@naira0/jstore');
+const { Jstore } = require('@naira0/jstore');
 const jstore = new Jstore('data');
 
 jstore.set('settings', 'fullscreen', true);

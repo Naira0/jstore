@@ -1,5 +1,9 @@
-const util = require('./util');
+const { Jstore } = require('../lib/jstore');
+const { Timer } = require('./util');
+const data = new Jstore('small');
 
-util.createRandom(100, 50, 'large');
-util.createRandom(50, 25, 'medium');
-util.createRandom(10, 5, 'small');
+const timer = new Timer();
+
+// write benchmarks here
+
+timer.print();

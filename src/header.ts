@@ -1,4 +1,4 @@
-import Jstore from './jstore';
+import { Jstore } from './jstore';
 
 export default class Header {
     jstore: Jstore;
