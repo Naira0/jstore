@@ -10,7 +10,7 @@ sadly jstore was taken so i had to add my username to it.
 
 #### Disclaimer: this is not a database.
 
-For more info check out the [wiki](https://github.com/Naira0terminator/jstore/wiki)
+[Documentation](https://github.com/Naira0terminator/jstore/wiki)
 
 #### Usage:
 ```javascript
