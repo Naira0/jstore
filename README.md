@@ -8,8 +8,6 @@ sadly jstore was taken so i had to add my username to it.
 
 ## Usage & format
 
-#### Disclaimer: this is not a database.
-
 [Documentation](https://github.com/Naira0terminator/jstore/wiki)
 
 #### Usage:
